@@ -81,3 +81,90 @@ NTSTATUS WSKAPI WSKSocket(
 NTSTATUS WSKAPI WSKCloseSocket(
     _In_ SOCKET Socket
 );
+
+NTSTATUS WSKAPI WSKIoctl(
+    _In_ SOCKET         Socket,
+    _In_ ULONG          ControlCode,
+    _In_ SIZE_T         InputSize,
+    _In_reads_bytes_opt_(InputSize)     PVOID InputBuffer,
+    _In_ SIZE_T         OutputSize,
+    _Out_writes_bytes_opt_(OutputSize)  PVOID OutputBuffer,
+    _Out_opt_ SIZE_T* OutputSizeReturned
+);
+
+NTSTATUS WSKAPI WSKSetSocketOpt(
+    _In_ SOCKET         Socket,
+    _In_ ULONG          OptionLevel,    // SOL_xxxx
+    _In_ ULONG          OptionName,     // SO_xxxx
+    _In_reads_bytes_(InputSize)     PVOID InputBuffer,
+    _In_ SIZE_T         InputSize
+);
+
+NTSTATUS WSKAPI WSKGetSocketOpt(
+    _In_ SOCKET         Socket,
+    _In_ ULONG          OptionLevel,    // SOL_xxxx
+    _In_ ULONG          OptionName,     // SO_xxxx
+    _Out_writes_bytes_(*OutputSize) PVOID OutputBuffer,
+    _Inout_ SIZE_T*     OutputSize
+);
+
+NTSTATUS WSKAPI WSKBind(
+    _In_ SOCKET         Socket,
+    _In_ PSOCKADDR      LocalAddress,
+    _In_ SIZE_T         LocalAddressLength
+);
+
+NTSTATUS WSKAPI WSKAccpet(
+    _In_ SOCKET         Socket,
+    _Out_opt_ PSOCKADDR LocalAddress,
+    _In_ SIZE_T         LocalAddressLength,
+    _Out_opt_ PSOCKADDR RemoteAddress,
+    _In_ SIZE_T         RemoteAddressLength
+);
+
+NTSTATUS WSKAPI WSKConnect(
+    _In_ SOCKET         Socket,
+    _In_ PSOCKADDR      RemoteAddress,
+    _In_ SIZE_T         RemoteAddressLength
+);
+
+NTSTATUS WSKAPI WSKDisconnect(
+    _In_ SOCKET         Socket,
+    _In_ ULONG          Flags
+);
+
+NTSTATUS WSKAPI WSKSend(
+    _In_ SOCKET         Socket,
+    _In_ PVOID          Buffer,
+    _In_ SIZE_T         BufferLength,
+    _Out_opt_ SIZE_T*   NumberOfBytesSent,
+    _In_ ULONG          dwFlags
+);
+
+NTSTATUS WSKAPI WSKSendTo(
+    _In_ SOCKET         Socket,
+    _In_ PVOID          Buffer,
+    _In_ SIZE_T         BufferLength,
+    _Out_opt_ SIZE_T*   NumberOfBytesSent,
+    _Reserved_ ULONG    Flags,
+    _In_opt_ PSOCKADDR  RemoteAddress,
+    _In_ SIZE_T         RemoteAddressLength
+);
+
+NTSTATUS WSKAPI WSKReceive(
+    _In_ SOCKET         Socket,
+    _In_ PVOID          Buffer,
+    _In_ SIZE_T         BufferLength,
+    _Out_opt_ SIZE_T*   NumberOfBytesRecvd,
+    _In_ ULONG          Flags
+);
+
+NTSTATUS WSKAPI WSKReceiveFrom(
+    _In_ SOCKET         Socket,
+    _In_ PVOID          Buffer,
+    _In_ SIZE_T         BufferLength,
+    _Out_opt_ SIZE_T*   NumberOfBytesRecvd,
+    _Reserved_ ULONG    Flags,
+    _Out_opt_ PSOCKADDR RemoteAddress,
+    _In_ SIZE_T         RemoteAddressLength
+);
