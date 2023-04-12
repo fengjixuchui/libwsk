@@ -1749,6 +1749,10 @@ NTSTATUS WSKAPI WSKReceiveFromUnsafe(
 //////////////////////////////////////////////////////////////////////////
 // Public  Function
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 VOID WSKAPI WSKSetLastError(
     _In_ NTSTATUS Status
 )
@@ -2526,7 +2530,7 @@ NTSTATUS WSKAPI WSKBind(
     return Status;
 }
 
-NTSTATUS WSKAPI WSKAccpet(
+NTSTATUS WSKAPI WSKAccept(
     _In_  SOCKET        Socket,
     _Out_ SOCKET*       SocketClient,
     _Out_opt_ PSOCKADDR LocalAddress,
@@ -2911,3 +2915,7 @@ NTSTATUS WSKAPI WSKReceiveFrom(
 
     return Status;
 }
+
+#ifdef __cplusplus
+}
+#endif
